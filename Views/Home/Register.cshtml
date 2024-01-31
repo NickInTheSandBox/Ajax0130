@@ -32,24 +32,32 @@
 
 @section Scripts {
     <script>
-        (async () => {
-            const username = document.querySelector("#userName");
-            const text = document.querySelector("#Text");
-            username.addEventListener('change', async () => {
-                const textA = username.value;
-                const url = `@Url.Content("~/api/CheckAccount")?name=${textA}`;
-                const response = await fetch(url);
-                const data = await response.text();
-                text.innerHTML = data;
+        const username = document.querySelector("#userName");
+        const text = document.querySelector("#Text");
+        const email = document.querySelector("#UserEmail");
+        const age = document.querySelector("#userAge");
+        const btn = document.querySelector("#button1");
+        const divinfo = document.querySelector("#div1")
+        username.addEventListener('change', async () => {
+            const textA = username.value;
+            const url = `@Url.Content("~/api/CheckAccount")?name=${textA}`;
+            const response = await fetch(url);
+            const data = await response.text();
+            text.innerHTML = data;
+            console.log(data);
+        })
+        // (async () => { 
+        //     })
+            btn.addEventListener('click', async () => {
+             event.preventDefault();
+            const url = `@Url.Content("~/api/register")?name=${username.value}&age=${age.value}&email=${email.value}`;
+            const response = await fetch(url);
+            const data = await response.text();
                 console.log(data);
-                
-            })
-            // const url = '@Url.Content("~/api/register")?name=Tom&age=30&email=Tom@company.com';
-            // const response = await fetch(url);
-            // const data = await response.text();
-            // console.log(data);
+                divinfo.innerHTML = data;
 
-        })();
+        })
+       
 
     </script>
 }
